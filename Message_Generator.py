@@ -28,25 +28,26 @@ def MsgGen ():
     while (True):   
         cursor.execute ("SELECT * FROM Links WHERE id = ?", (random_id,))
         res = cursor.fetchone ()
+        '''
         date = res [3]
         record_date = datetime.strptime (date, '%Y-%m-%d')
         if ((current_date - record_date).days > 7):     # check if find outdated news
             random_id = DelAndRegenerate(conn, cursor, random_id)
             continue
+        '''
+        # Dynamic import GetContent function
+        with open ("Web_Scraping/sources.json", "r", encoding="utf-8") as f:
+            sources = json.load (f)
+        source = res [2]
+        link = res [1]
+        module = importlib.import_module (sources[source])
+        GetContent = getattr(module, 'GetContent', None)
+        content = GetContent (link)
+        if content == "Invalid Content":         # check if it's too short
+            random_id = DelAndRegenerate(conn, cursor, random_id)
+            continue
         else:
-            # Dynamic import GetContent function
-            with open ("Web_Scraping/sources.json", "r", encoding="utf-8") as f:
-                sources = json.load (f)
-            source = res [2]
-            link = res [1]
-            module = importlib.import_module (sources[source])
-            GetContent = getattr(module, 'GetContent', None)
-            content = GetContent (link)
-            if content == "Invalid Content":         # check if it's too short
-                random_id = DelAndRegenerate(conn, cursor, random_id)
-                continue
-            else:
-                break
+            break
     
     prompt = "\nSuppose you are the one who won't say many words and you've read the passage and want to talk with me. According to the article, focus on only one aspect and start the conversation, can be the form of exclamation or asking opinions. As the user hasn't read it, brief summary and introduction is necessary, proper greetings are needed too, but don't tell them 'This article...', because they don't know the article, no details, 4 sentences are enough, within 200 words, keep your tone light and nature."
     message = content + prompt

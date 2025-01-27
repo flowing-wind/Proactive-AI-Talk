@@ -27,10 +27,11 @@ client = OpenAI(api_key=key, base_url="https://api.deepseek.com")
 messages = [{"role": "system", "content": "you are my friend and we are talking about some interesing news that happened recently"},]
 tmp = {"role": "user", "content": MsgGen ()}
 messages.append (tmp)
-for i in range (5):
+k = int (input ("The number of rounds you want to chat with the AI: "))
+for i in range (k):
     message = SendMsg (messages)
     messages.append (message)
     print ("\n"+message.content)
-    msg = input ("\nYour reply: ")
+    msg = input ("\nUser: ")
     user_msg = {"role": "user", "content": msg}
     messages.append (user_msg)
