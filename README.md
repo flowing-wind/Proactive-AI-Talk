@@ -18,7 +18,7 @@ AI will "get" news from the Internet and start a conversation with you.
 This project uses a web scraper to gather news/articles from various websites and feed them into AI models, along with appropriate  prompts to instruct them to generate topics and initiate a conversation.
 
 ## Demo
-**This is an example using DeepSeek API to chat with.  **
+__This is an example using DeepSeek API to chat with.__
 
 The number of rounds you want to chat with the AI: 3
 
@@ -34,20 +34,29 @@ AI: Oh, Black Myth: Wukong is such a stunning game, but yeah, it’s a beast on 
 
 
 ## Usage
-1. Clone this repositories.
+1. Clone this repository.
+
    ```bash
    git clone https://github.com/flowing-wind/Proactive-AI-Talk.git
    ```
+
 2. Install necessary libraries.
+
    ```bash
    pip install -r requirements.txt
    ```
+
 3. Create a new file `api_key.txt` in the root directory of the project and fill in the API key of your model.
+
+
 4. Run `init.py` and this will create a `db` file in `Web_Scraping`.
+
    ```bash
    python init.py
    ```
+
 5. Run `api.py`, input the rounds you want to chat and begin the talk.
+
    ```bash
    python api.py
    ```
@@ -82,9 +91,12 @@ For example, if your `.py` file path is `Web_Scraping/TheVerge/theverge.py`, the
 ### Scraper
 To be compatible with this program, in general, you should define two functions in your `.py` file:  
 1. `YourScraper_init()`
+
    This function is called in `init.py`, and is responsible for searching (e.g. search the main page) and adding news links to the database.  
    When adding links to the database, the `source` column should match the `YourScraper` in json file, for the program will import corresponding `GetContent` function according to the `source` in database and get the function through json.
+   
 2. `GetContent(link)`
+
    The function name is designed to be the same across all scrapers for better invocation and management. It is mainly used to scrape news/articles from the links gathered before and return the passage.
 ## License
   This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
