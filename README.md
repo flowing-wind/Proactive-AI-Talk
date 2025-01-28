@@ -2,7 +2,7 @@
 
 ![Static Badge](https://img.shields.io/badge/python-3.12-blue) ![Static Badge](https://img.shields.io/badge/platforms-Windows_Linux-%2302dbf0) ![Static Badge](https://img.shields.io/badge/contributions-welcome-green) ![Static Badge](https://img.shields.io/badge/I_speak-English_Chinese-%23ed02ba)
 
-AI will "get" news from the Internet and start a conversation with you.
+Engage with AI-driven conversations on the latest news.
 
 #### Table of Contents
 - [Proactive AI Talk](#proactive-ai-talk)
